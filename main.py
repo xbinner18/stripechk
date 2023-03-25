@@ -20,7 +20,7 @@ Welcome To Termux CC Checker.
 Contact me on tg @Xbinner2"""
 )
 
-amount = int(input(f"\n{colorama.Fore.BLACK}Amount=> "))
+amount = int(input(f"\namount=> "))
 p = input("\nproxy remote=> ")
 s = requests.Session()
 proxies = {"http":p,"https":p}
