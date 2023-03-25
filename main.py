@@ -73,7 +73,6 @@ def chk(CCN, MM, YY, CVV):
         "sid": Sid,
         "key": "pk_live_8nHNgurCsBkFZNukDOLgJ13T",
         "card[number]": int(CCN),
-        "card[cvc]": int(CVV),
         "card[exp_month]": MM,
         "card[exp_year]": int(YY),
     }
