@@ -20,7 +20,7 @@ Welcome To Termux CC Checker.
 Contact me on tg @Xbinner2"""
 )
 
-# amount = int(input(f"\n{colorama.Fore.BLACK}Amount=> "))
+amount = int(input(f"\n{colorama.Fore.BLACK}Amount=> "))
 p = input("\nproxy remote=> ")
 s = requests.Session()
 proxies = {"http":p,"https":p}
@@ -90,7 +90,7 @@ def chk(CCN, MM, YY, CVV):
         "formName": "PaymentForm",
         "fullstripe_name": Name,
         "fullstripe_email": Email,
-        "fullstripe_custom_amount": "2",
+        "fullstripe_custom_amount": amount,
         "fullstripe_address_line1": Street,
         "fullstripe_address_city": City,
         "fullstripe_address_state": State,
