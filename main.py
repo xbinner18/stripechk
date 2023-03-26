@@ -113,10 +113,10 @@ def chk(CCN, MM, YY, CVV):
     )
     msg = rx.json()["msg"]
     
-    if rx.json()["success"] == false:
+    if rx.json()["success"] == False:
         sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
     
-    elif rx.json()["success"] == true:
+    elif rx.json()["success"] == True:
         sys.stdout.write(
             f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
         )
