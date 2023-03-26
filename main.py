@@ -113,17 +113,17 @@ def chk(CCN, MM, YY, CVV):
     )
     msg = rx.json()["msg"]
     
-    if "false" in rx.text:
+    if rx.json()["success"] == false:
         sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
     
-    if "true" in rx.text:
+    elif rx.json()["success"] == true:
         sys.stdout.write(
             f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
         )
         with io.open("LIVES.txt", "a") as f:
             f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
 
-    if "security code" in rx.text:
+    elif "security code" in rx.text:
         sys.stdout.write(
             f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
         )
