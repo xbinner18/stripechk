@@ -23,7 +23,7 @@ Contact me on tg @Xbinner2"""
 amount = int(input(f"\namount=> "))
 p = input("\nproxy remote=> ")
 s = requests.Session()
-s.verify = False
+# s.verify = False
 s.trust_env = False
 proxies = {"http":p,"https":p}
 s.proxies.update(proxies)
