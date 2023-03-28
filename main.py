@@ -22,22 +22,21 @@ Contact me on tg @Xbinner2"""
 
 amount = int(input(f"\namount=> "))
 p = input("\nproxy remote=> ")
-s = requests.Session()
-# s.verify = False
-s.trust_env = False
-proxies = {"http":p,"https":p}
-s.proxies.update(proxies)
+
 UA = "Mozilla/5.0 (Android 13; Mobile; rv:68.0) Gecko/68.0 Firefox/107.0"
 
 
 def grab():
     CC = input("\nlink combo➾ ")
-    cards = s.get(CC)
+    cards = requests.get(CC)
     cc = cards.text.split("\n")
     return cc
 
 
 def chk(CCN, MM, YY, CVV):
+    s = requests.Session()
+    proxies = {"http":p,"https":p}
+    s.proxies.update(proxies)
     head = {
         "user-agent": UA,
         "accept": "application/json, text/plain, */*",
