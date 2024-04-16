@@ -36,7 +36,7 @@ def grab():
 def chk(CCN, MM, YY, CVV):
     s = requests.Session()
     # proxies = {"http":p,"https":p}
-    s.proxies.update(proxies)
+    # s.proxies.update(proxies)
     head = {
         "user-agent": UA,
         "accept": "application/json, text/plain, */*",
@@ -78,6 +78,7 @@ def chk(CCN, MM, YY, CVV):
         "card[number]": int(CCN),
         "card[exp_month]": MM,
         "card[exp_year]": int(YY),
+        "card[cvc]": CVV
     }
 
     token = s.post("https://api.stripe.com/v1/tokens", data=postdata, headers=HEADER)
