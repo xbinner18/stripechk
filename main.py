@@ -76,9 +76,9 @@ def chk(CCN, MM, YY, CVV):
         "sid": Sid,
         "key": "pk_live_4WOpSHSn6SRZyq1Lgv7Zm4Or",
         "card[number]": int(CCN),
+        "card[cvc]": int(CVV),
         "card[exp_month]": MM,
         "card[exp_year]": int(YY),
-        "card[cvc]": CVV
     }
 
     token = s.post("https://api.stripe.com/v1/tokens", data=postdata, headers=HEADER)
@@ -115,7 +115,7 @@ def chk(CCN, MM, YY, CVV):
     )
     msg = rx.json()["msg"]
     
-    if rx.json()["success"] == False:
+    if "declined" in rx.text:
         sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
     
     elif rx.json()["success"] == True:
