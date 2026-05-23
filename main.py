@@ -117,25 +117,25 @@ def chk(CCN, MM, YY, CVV):
     msg = rx.json()["msg"]
     
     if "declined" in rx.text:
-        sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
+        sys.stdout.write(f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n")
     
-    elif rx.json()["success"] == True:
+    elif ("True" or "Payement Successful") in rx.text:
         sys.stdout.write(
-            f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
+            f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n"
         )
         with io.open("LIVES.txt", "a") as f:
             f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
 
     elif "security code" in rx.text:
         sys.stdout.write(
-            f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
+            f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n"
         )
         with io.open("CCN.txt", "a") as f:
             f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
 
     else:
         sys.stdout.write(
-            f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{rx.text}|{TYPE}|{BRAND}|{COU}|Xbinner2\n"
+            f"\n{colorama.Fore.RED}[DECLINED]|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{rx.text}|{TYPE}|{BRAND}|{COU}|Xbinner18\n"
         )
 
 
@@ -149,9 +149,9 @@ def main():
         CVV = i.split("|")[3]
         try:
             chk(CCN, MM, YY, CVV)
-            time.sleep(0.5)
+            time.sleep(1)
         except Exception as e:
-            print(e)
+            print(f"Error: {e}")
             pass
     print(
         f"\n{colorama.Fore.BLUE}FINISHED! Process done! Checked {colorama.Fore.RED}{len(CARDS)} Tasks\n"
