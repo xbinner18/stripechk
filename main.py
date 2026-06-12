@@ -128,14 +128,22 @@ def chk(CCN, MM, YY, CVV):
             f"\n{colorama.Fore.GREEN}LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n"
         )
         with io.open("LIVES.txt", "a") as f:
-            f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
+            f.write(f"LIVE|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n")
+
+    elif ("purchase" or "funds") in rx.text:
+        sys.stdout.write(
+            f"\n{colorama.Fore.GREEN}VALID|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n"
+        )
+        with io.open("VALID.txt", "a") as f:
+            f.write(f"VALID|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n")
+
 
     elif "security code" in rx.text:
         sys.stdout.write(
             f"\n{colorama.Fore.BLUE}CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n"
         )
         with io.open("CCN.txt", "a") as f:
-            f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner2\n")
+            f.write(f"CCN|{int(CCN)}|{MM}|{int(YY)}|{int(CVV)}|{msg}|{TYPE}|{BRAND}|{COU}|Xbinner18\n")
 
     else:
         sys.stdout.write(
