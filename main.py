@@ -156,7 +156,9 @@ def main():
             chk(CCN, MM, YY, CVV)
             time.sleep(1)
         except Exception as e:
-            (f"\n{colorama.Fore.RED}Failed to Check {i} Error: {e}\n")
+            sys.stdout.write(
+                f"\n{colorama.Fore.RED}Failed to Check {i} Error: {e}\n"
+            )
             pass
     sys.stdout.write(
         f"\n{colorama.Fore.BLUE}FINISHED! Process done! Checked {colorama.Fore.RED}{len(CARDS)} Tasks\n"
