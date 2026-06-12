@@ -35,7 +35,7 @@ UA = "Mozilla/5.0 (Linux; Android 15; SM-S931B Build/AP3A.240905.015.A2; wv) App
 
 
 def grab():
-    with open("cc.txt", "r") as f:
+    with io.open("cc.txt", "r") as f:
         return f.readlines()
 
 
@@ -84,8 +84,13 @@ def chk(CCN, MM, YY, CVV):
         "card[exp_month]": int(MM),
         "card[exp_year]": int(YY),
     }
-
+    
     token = s.post("https://api.stripe.com/v1/tokens", data=postdata, headers=HEADER)
+    if not token.ok:
+        sys.stdout.write(
+            f"\n{colorama.Fore.RED}Error in sending request retrying")
+        time.sleep(0.5)
+        token = s.post("https://api.stripe.com/v1/tokens", data=postdata, headers=HEADER)
     Id = token.json()["id"]
     TYPE = token.json()["card"]["funding"]
     BRAND = token.json()["card"]["brand"]
@@ -151,9 +156,9 @@ def main():
             chk(CCN, MM, YY, CVV)
             time.sleep(1)
         except Exception as e:
-            print(f"Error: {e}")
+            (f"\n{colorama.Fore.RED}Failed to Check {i} Error: {e}\n")
             pass
-    print(
+    sys.stdout.write(
         f"\n{colorama.Fore.BLUE}FINISHED! Process done! Checked {colorama.Fore.RED}{len(CARDS)} Tasks\n"
     )
 
