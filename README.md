@@ -13,3 +13,7 @@ You can contact me [telegram](https://telegram.me/xbinner18)
 - This project doesnt support any cybercrime its just for education.
 - This is an opensource project selling it isnt allowed.
 ```
+
+## Supported Cards
+AMEX||VISA||MASTERCARD
+Doesn't Support Discover Cards
