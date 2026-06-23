@@ -88,7 +88,7 @@ def chk(CCN, MM, YY, CVV):
     token = s.post("https://api.stripe.com/v1/tokens", data=postdata, headers=HEADER)
     if not token.ok:
         sys.stdout.write(
-            f"\n{colorama.Fore.RED}Error in sending request probably cvv contains 00\n"
+            f"\n{colorama.Fore.RED}Error in sending request probably cvv startswith 0 or site is dead to make http req\n"
         )
     Id = token.json()["id"]
     TYPE = token.json()["card"]["funding"]
